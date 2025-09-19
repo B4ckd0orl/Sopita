@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi amada Sofía ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            color: #4a235a;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Contenedor del video inicial y el botón de continuar */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .overlay h1 {
+            color: #fff;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px #000;
+        }
+        .continue-btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: #ff6f91;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            display: none;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(255, 111, 145, 0.5);
+            transition: transform 0.3s;
+        }
+        .continue-btn:hover {
+            background: #ff355e;
+            transform: scale(1.05);
+        }
+
+        /* Contenedor de la carta principal */
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 60px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            max-width: 650px;
+            width: 90%;
+            display: none; /* Inicia oculto */
+            overflow-y: auto;
+            max-height: 80vh;
+            position: relative;
+            z-index: 10;
+        }
+        .container::-webkit-scrollbar { width: 8px; }
+        .container::-webkit-scrollbar-track { background: #f1e4f4; border-radius: 10px; }
+        .container::-webkit-scrollbar-thumb { background: #d8bfd8; border-radius: 10px; border: 2px solid #fff; }
+
+        /* Contenedor del mensaje final */
+        .final-message {
+            display: none; /* Inicia oculto */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+        }
+        .final-message h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5em;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            animation: textGlowPurple 3s ease-in-out infinite alternate;
+        }
+
+        /* Estilos generales para ambos contenedores */
+        h1.carta-title {
+            font-family: 'Great Vibes', cursive;
+            color: #8e44ad;
+            font-size: 3.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            animation: textGlowPurple 3s ease-in-out infinite alternate;
+        }
+        @keyframes textGlowPurple {
+            from { text-shadow: 0 0 5px #d2b4de; }
+            to { text-shadow: 0 0 10px #d2b4de, 0 0 20px #d2b4de; }
+        }
+        p {
+            font-size: 1.25em;
+            line-height: 1.8;
+            margin-bottom: 18px;
+            color: #6a0571;
+        }
+        .heart-beat {
+            color: #e74c3c;
+            font-size: 2.5em;
+            animation: heartBeat 1s infinite alternate;
+            display: inline-block;
+            margin: 0 8px;
+        }
+        @keyframes heartBeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            margin-top: 30px;
+            font-size: 2em;
+            color: #8e44ad;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .petal, .gif-love {
+            position: absolute;
+            top: -10%;
+            font-size: 2em;
+            animation: fall linear infinite;
+        }
+        .gif-love {
+            width: 30px;
+            height: 30px;
+            animation-duration: 8s;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+        .magic-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: #ff6f91;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 0 15px rgba(255, 111, 145, 0.5);
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+        .magic-btn:hover {
+            background: #ff355e;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="overlay">
+        <h1>Escucha esto primero 🎵</h1>
+        <iframe id="vimeoPlayer" src="https://player.vimeo.com/video/1120011544?autoplay=1&muted=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <button class="continue-btn" id="continueBtn">Continuar</button>
+    </div>
+
+    <div class="container" id="cartaContainer">
+        <h1 class="carta-title">Mi Sopita, Vida Mía</h1>
+        <p>Hoy quiero abrir mi corazón y escribirte estas palabras porque a veces me cuesta expresarme como debería.</p>
+        <p>Lo primero que quiero decirte es que te amo inmensamente. Eres lo más hermoso que tengo en mi vida, la razón de mis sonrisas y mi mayor motivación para seguir adelante cada día.</p>
+        <p>Sé que en varias ocasiones he sido un idiota y he cometido errores que te han lastimado. Te pido perdón de corazón por cada vez que no supe escucharte, por cada momento en el que no estuve a la altura de lo que mereces. Mi intención nunca ha sido hacerte daño, y me duele saber que a veces no fui el compañero que necesitabas.</p>
+        <p>Espero que puedas disculparme. Quiero que sepas que siempre lucharé por nuestro amor, porque tú eres mi presente y mi futuro, y no hay nada que desee más que caminar a tu lado.</p>
+        <p>Llevo más de una semana programando esto, espero te guste negra. Lo he hecho con todo mi corazón y la verdad me ha resultado difícil, pero lo logré. Te amo inmensamente mi niña hermosa <span class="heart-beat">:')</span></p>
+        <p class="signature">- Con todo mi amor</p>
+        
+        <button class="magic-btn" id="showFinalMessageBtn">PRESIONA AQUÍ</button>
+    </div>
+
+    <div class="final-message" id="finalMessageContainer">
+        <h1>TE AMO NEGRA DE MI VIDA <span class="heart-beat">:')</span></h1>
+    </div>
+
+    <div class="petal">🌸</div>
+    <div class="petal">🌷</div>
+    <div class="petal">💖</div>
+    <div class="petal">🌸</div>
+    <div class="petal">🌷</div>
+    <div class="petal">💖</div>
+    <div class="petal">🌸</div>
+    <div class="petal">🌷</div>
+    <img src="https://i.imgur.com/Uu7FzUq.gif" class="gif-love" style="left:15%; animation-duration:9s;">
+    <img src="https://i.imgur.com/Uu7FzUq.gif" class="gif-love" style="left:40%; animation-duration:11s;">
+    <img src="https://i.imgur.com/Uu7FzUq.gif" class="gif-love" style="left:65%; animation-duration:8s;">
+    <img src="https://i.imgur.com/Uu7FzUq.gif" class="gif-love" style="left:80%; animation-duration:12s;">
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script>
+        const iframe = document.getElementById('vimeoPlayer');
+        const player = new Vimeo.Player(iframe);
+        const continueBtn = document.getElementById('continueBtn');
+        const overlay = document.getElementById('overlay');
+        const carta = document.getElementById('cartaContainer');
+        const showFinalMessageBtn = document.getElementById('showFinalMessageBtn');
+        const finalMessage = document.getElementById('finalMessageContainer');
+
+        // Función para mostrar el botón de Continuar al finalizar el video
+        player.on('ended', function() {
+            continueBtn.style.display = 'inline-block';
+        });
+
+        // Evento para ocultar el overlay y mostrar la carta
+        continueBtn.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            carta.style.display = 'block';
+        });
+
+        // Evento para ocultar la carta y mostrar el mensaje final
+        showFinalMessageBtn.addEventListener('click', () => {
+            carta.style.display = 'none';
+            finalMessage.style.display = 'flex';
+        });
+    </script>
+</body>
+</html>
